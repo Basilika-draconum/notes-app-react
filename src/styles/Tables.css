@@ -1,0 +1,47 @@
+/* table */
+.table {
+    margin-bottom: 20px;
+    color: #606060;
+}
+
+.table-head {
+    background-color: #999999;
+    color: white;
+
+}
+
+.table-head-row {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.table-head-item {
+    width: 200px;
+}
+
+.table-head-item.icon {
+    width: 50px
+}
+
+.table-row {
+    text-align: center;
+    background-color: #e8eaf5;
+}
+
+.wrapper-btn-create {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn-create {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+

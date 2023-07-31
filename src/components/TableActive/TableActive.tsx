@@ -4,16 +4,24 @@ import { ReactComponent as Delete } from "../../images/delete.svg";
 import "../../styles/Tables.css";
 import useModal from "../../hooks/useModal";
 import Modal from "../Modal/Modal";
-import { NotesListProps } from "../../typescript/typescriptTypes";
 import TableActiveRow from "./TableActiveRow";
+import { useSelector } from "react-redux";
+import { getNotes } from "../../redux/notes/notesSelector";
 
-const TableActive: React.FC<NotesListProps> = ({ notes }) => {
+const TableActive: React.FC = () => {
   const { isModalOpen, setIsModalOpen } = useModal({ styles: "show" });
+  
+  const notes = useSelector(getNotes);
+
+  const getActiveNotes = () => {
+    const result = notes.filter((note) => note.status === "active");
+    return result;
+  };
+  const activeNotes = getActiveNotes();
 
   const openModal = () => {
     setIsModalOpen(true);
   };
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -38,7 +46,7 @@ const TableActive: React.FC<NotesListProps> = ({ notes }) => {
           </tr>
         </thead>
         <tbody className="table-active">
-          {notes.map((note) => (
+          {activeNotes.map((note) => (
             <TableActiveRow key={note.id} note={note} />
           ))}
         </tbody>

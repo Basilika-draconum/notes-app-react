@@ -8,8 +8,13 @@ export interface Note {
   dates: string;
 }
 
-export interface NotesListProps {
+export interface NotesList {
   notes: Note[];
+}
+export interface NotesListState {
+  notes: Note[];
+  isLoading: boolean,
+  error:null|string,
 }
 export interface NoteProps {
   note: Note;

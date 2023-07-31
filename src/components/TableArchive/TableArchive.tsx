@@ -1,10 +1,19 @@
 import React from "react";
 import { ReactComponent as Archive } from "../../images/archive.svg";
 import "../../styles/Tables.css";
-import { NotesListProps } from "../../typescript/typescriptTypes";
 import TableArchiveRow from "./TableArchiveRow";
+import{ useSelector } from 'react-redux'
+import { getNotes } from "../../redux/notes/notesSelector";
 
-const TableArchive: React.FC<NotesListProps> = ({ notes }) => {
+const TableArchive: React.FC = () => {
+    const notes = useSelector(getNotes);
+
+  const getActiveNotes = () => {
+    const result = notes.filter((note) => note.status === "archived");
+    return result;
+  };
+  const archiveNotes = getActiveNotes();
+  
   return (
     <>
       <h2 className="table-head-row">Archived notes</h2>
@@ -22,7 +31,7 @@ const TableArchive: React.FC<NotesListProps> = ({ notes }) => {
           </tr>
         </thead>
         <tbody className="table-archived">
-          {notes.map((note) => (
+          {archiveNotes.map((note) => (
             <TableArchiveRow key={note.id} note={note} />
           ))}
         </tbody>

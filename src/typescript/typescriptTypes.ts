@@ -5,7 +5,7 @@ export interface Note {
   content: string;
   created_at: string;
   status: string;
-  dates: string;
+  dates: string[]|string;
 }
 
 export interface NotesList {
@@ -21,4 +21,10 @@ export interface NoteProps {
 }
 export interface ModalProps {
   onClose: ()=>void;
+}
+
+export interface NoteFormState {
+  name: string;
+  category: string;
+  content: string;
 }

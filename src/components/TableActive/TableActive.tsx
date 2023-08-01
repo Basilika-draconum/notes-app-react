@@ -10,11 +10,10 @@ import { getNotes } from "../../redux/notes/notesSelector";
 
 const TableActive: React.FC = () => {
   const { isModalOpen, setIsModalOpen } = useModal({ styles: "show" });
-  
   const notes = useSelector(getNotes);
 
   const getActiveNotes = () => {
-    const result = notes.filter((note) => note.status === "active");
+    const result = notes.filter((note) => note.status === true);
     return result;
   };
   const activeNotes = getActiveNotes();

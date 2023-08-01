@@ -9,7 +9,7 @@ const initialState: NotesList = {
       category: "Task",
       content: "1. Milk 2. Eggs 3. Bread",
       created_at: "September 20, 2023",
-      status: "active",
+      status: true,
       dates: "",
     },
     {
@@ -18,7 +18,7 @@ const initialState: NotesList = {
       category: "Random thought",
       content: "Discussed project timeline and assigned tasks to team members.",
       created_at: "May 09, 2023",
-      status: "active",
+      status: true,
       dates: "",
     },
     {
@@ -27,7 +27,7 @@ const initialState: NotesList = {
       category: "Idea",
       content: "Implement new ideas for presentation",
       created_at: "June 23, 2023",
-      status: "active",
+      status: true,
       dates: "",
     },
     {
@@ -36,7 +36,7 @@ const initialState: NotesList = {
       category: "Random thought",
       content: "Visit the Grand Canyon and relax on a beach in Hawaii",
       created_at: "July 05, 2023",
-      status: "active",
+      status: true,
       dates: "",
     },
     {
@@ -45,7 +45,7 @@ const initialState: NotesList = {
       category: "Task",
       content: "The lean startup",
       created_at: "July 28, 2023",
-      status: "active",
+      status: true,
       dates: "",
     },
     {
@@ -55,7 +55,7 @@ const initialState: NotesList = {
       content:
         "I’m gonna have a dentist appointment on the 3/5/2021, I moved it from 5/5/2021",
       created_at: "July 28, 2023",
-      status: "active",
+      status: true,
       dates: "3/5/2021,5/5/2021",
     },
     {
@@ -64,7 +64,7 @@ const initialState: NotesList = {
       category: "Idea",
       content: "Find investors and new developers, build new office",
       created_at: "May 12, 2023",
-      status: "active",
+      status: true,
       dates: "",
     },
     {
@@ -73,7 +73,7 @@ const initialState: NotesList = {
       category: "Random thought",
       content: "Learn grammar and new words",
       created_at: "July 05, 2022",
-      status: "archived",
+      status: false,
       dates: "",
     },
   ],
@@ -88,7 +88,6 @@ const noteSlice = createSlice({
         draftState.notes.push(action.payload);
       });
     },
-
     deleteNote(state, action: PayloadAction<string>) {
       return produce(state, (draftState: Draft<NotesList>) => {
         const noteIdToDelete = action.payload;
@@ -97,8 +96,16 @@ const noteSlice = createSlice({
         );
       });
     },
+    toggleStatusNote(state, action: PayloadAction<string>) {
+      const noteToUpdateStatus = state.notes.find(
+        (note) => note.id === action.payload
+      );
+      if (noteToUpdateStatus) {
+        noteToUpdateStatus.status = !noteToUpdateStatus.status;
+      }
+    },
   },
 });
 
-export const { deleteNote,addNote } = noteSlice.actions;
+export const { deleteNote, addNote, toggleStatusNote } = noteSlice.actions;
 export const notesReducer = noteSlice.reducer;

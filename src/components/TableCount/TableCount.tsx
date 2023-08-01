@@ -7,21 +7,21 @@ import { useSelector } from "react-redux";
 const TableCount: React.FC = () => {
   const notes = useSelector(getNotes);
 
-  const countNotes = (arr: Note[], str: string, category: string): number => {
+  const countNotes = (arr: Note[], bool: boolean, category: string): number => {
     let count = 0;
     for (let i = 0; i < arr.length; i++) {
-      if (arr[i].status === str && arr[i].category === category) {
+      if (arr[i].status === bool && arr[i].category === category) {
         count++;
       }
     }
     return count;
   };
-  let countTaskActive = countNotes(notes, "active", "Task");
-  let countTaskArchived = countNotes(notes, "archived", "Task");
-  let countIdeaActive = countNotes(notes, "active", "Idea");
-  let countIdeaArchived = countNotes(notes, "archived", "Idea");
-  let countRandomActive = countNotes(notes, "active", "Random thought");
-  let countRandomArchived = countNotes(notes, "archived", "Random thought");
+  let countTaskActive = countNotes(notes, true, "Task");
+  let countTaskArchived = countNotes(notes, false, "Task");
+  let countIdeaActive = countNotes(notes, true, "Idea");
+  let countIdeaArchived = countNotes(notes, false, "Idea");
+  let countRandomActive = countNotes(notes, true, "Random thought");
+  let countRandomArchived = countNotes(notes, false, "Random thought");
 
   return (
     <table className="table">

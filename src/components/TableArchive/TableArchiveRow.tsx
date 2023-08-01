@@ -1,11 +1,15 @@
 import React from "react";
 import { NoteProps } from "../../typescript/typescriptTypes";
-import {ReactComponent as Archive} from "../../images/archive.svg"
+import { ReactComponent as Archive } from "../../images/archive.svg";
+import { useDispatch } from "react-redux";
+import { toggleStatusNote } from "../../redux/notes/notesSlice";
 
 const TableArchiveRow: React.FC<NoteProps> = ({ note }) => {
+  const dispatch = useDispatch();
+  const handleChangeStatusNote = () => dispatch(toggleStatusNote(note.id));
   return (
     <tr className="table-row table-row-archived" id={note.id}>
-      <td id="list-name">{note.name}</td>
+      <td>{note.name}</td>
       <td>{note.created_at}</td>
       <td>{note.category}</td>
       <td>{note.content}</td>
@@ -13,9 +17,10 @@ const TableArchiveRow: React.FC<NoteProps> = ({ note }) => {
       <td>
         <button
           className="btn btn-icons btn-archive"
-          data-action="unarchive"
-          data-id={note.id}
-        ><Archive width={22} height={22}/></button>
+          onClick={handleChangeStatusNote}
+        >
+          <Archive width={22} height={22} />
+        </button>
       </td>
     </tr>
   );

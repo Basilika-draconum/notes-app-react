@@ -4,12 +4,12 @@ import { ReactComponent as Archive } from "../../images/archive.svg";
 import { ReactComponent as Delete } from "../../images/delete.svg";
 import { ReactComponent as Edit } from "../../images/edit.svg";
 import { useDispatch } from "react-redux";
-import { deleteNote } from "../../redux/notes/notesSlice";
+import { deleteNote, toggleStatusNote } from "../../redux/notes/notesSlice";
 
 const TableActiveRow: React.FC<NoteProps> = ({ note }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleDeleteNote = () => dispatch(deleteNote(note.id));
-
+  const handleChangeStatusNote = () => dispatch(toggleStatusNote(note.id));
 
   return (
     <tr className="table-row table-row-active" id={note.id}>
@@ -30,17 +30,13 @@ const TableActiveRow: React.FC<NoteProps> = ({ note }) => {
       <td>
         <button
           className="btn btn-icons btn-archive"
-          data-action="archive"
-          data-id={note.id}
+          onClick={handleChangeStatusNote}
         >
           <Archive width={22} height={22} />
         </button>
       </td>
       <td>
-        <button
-          className="btn btn-icons btn-delete"
-          onClick={handleDeleteNote}
-        >
+        <button className="btn btn-icons btn-delete" onClick={handleDeleteNote}>
           <Delete width={22} height={22} />
         </button>
       </td>

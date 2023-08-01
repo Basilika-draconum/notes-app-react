@@ -9,7 +9,7 @@ const TableArchive: React.FC = () => {
     const notes = useSelector(getNotes);
 
   const getActiveNotes = () => {
-    const result = notes.filter((note) => note.status === "archived");
+    const result = notes.filter((note) => note.status === false);
     return result;
   };
   const archiveNotes = getActiveNotes();

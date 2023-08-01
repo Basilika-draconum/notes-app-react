@@ -4,7 +4,7 @@ export interface Note {
   category: string;
   content: string;
   created_at: string;
-  status: string;
+  status: boolean;
   dates: string[]|string;
 }
 

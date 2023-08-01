@@ -61,7 +61,7 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
       category: noteFormState.category,
       content: noteFormState.content,
       created_at: `${month} ${day},${year}`,
-      status: "active",
+      status: true,
       dates: noteDates,
     };
     dispatch(addNote(newNote));

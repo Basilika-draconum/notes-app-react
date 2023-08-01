@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { notesReducer } from "./notes/notesSlice";
+import { modalReducer } from './modal/modalSlice';
 
 export const store = configureStore({
   reducer: {
     notes: notesReducer,
+    modal:modalReducer,
   }
 })
 

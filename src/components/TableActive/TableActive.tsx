@@ -2,14 +2,14 @@ import React from "react";
 import { ReactComponent as Archive } from "../../images/archive.svg";
 import { ReactComponent as Delete } from "../../images/delete.svg";
 import "../../styles/Tables.css";
-import useModal from "../../hooks/useModal";
-import Modal from "../Modal/Modal";
 import TableActiveRow from "./TableActiveRow";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getNotes } from "../../redux/notes/notesSelector";
+import { openModal } from "../../redux/modal/modalSlice";
 
 const TableActive: React.FC = () => {
-  const { isModalOpen, setIsModalOpen } = useModal({ styles: "show" });
+  // const { isModalOpen, setIsModalOpen } = useModal({ styles: "show" });
+  const dispatch = useDispatch();
   const notes = useSelector(getNotes);
 
   const getActiveNotes = () => {
@@ -18,11 +18,8 @@ const TableActive: React.FC = () => {
   };
   const activeNotes = getActiveNotes();
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const openModalForm = () => {
+    dispatch(openModal(null));
   };
   return (
     <div>
@@ -51,11 +48,14 @@ const TableActive: React.FC = () => {
         </tbody>
       </table>
       <div className="wrapper-btn-create">
-        <button type="button" className="btn-create create" onClick={openModal}>
+        <button
+          type="button"
+          className="btn-create create"
+          onClick={openModalForm}
+        >
           Create Note
         </button>
       </div>
-      {isModalOpen && <Modal onClose={closeModal} />}
     </div>
   );
 };

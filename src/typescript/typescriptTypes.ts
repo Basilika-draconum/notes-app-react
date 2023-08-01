@@ -20,11 +20,16 @@ export interface NoteProps {
   note: Note;
 }
 export interface ModalProps {
-  onClose: ()=>void;
+  initialNote?: Note;
 }
 
 export interface NoteFormState {
   name: string;
   category: string;
   content: string;
+}
+
+export interface ModalState {
+  isOpen: boolean;
+  id: string | null;
 }

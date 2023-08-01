@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import { ReactComponent as Close } from "../../images/cross.svg";
 import "../../styles/Modal.css";
 import {
@@ -6,8 +6,12 @@ import {
   Note,
   NoteFormState,
 } from "../../typescript/typescriptTypes";
-import { useDispatch } from "react-redux";
-import { addNote } from "../../redux/notes/notesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addNote, editNote } from "../../redux/notes/notesSlice";
+import { toggleModal } from "../../redux/modal/modalSelector";
+import { closeModal } from "../../redux/modal/modalSlice";
+import { getNotes } from "../../redux/notes/notesSelector";
+import { RootState } from "../../redux/store";
 
 const initialNoteFormState: NoteFormState = {
   name: "",
@@ -31,13 +35,33 @@ export const months = [
 
 const dateRegex = /\b(0?[1-9]|1[0-2])\/(0?[1-9]|[12]\d|3[01])\/\d{4}\b/g;
 
-const Modal: React.FC<ModalProps> = ({ onClose }) => {
-  const [noteFormState, setNoteFormState] =
-    useState<NoteFormState>(initialNoteFormState);
+const Modal: React.FC<ModalProps> = () => {
+  const initialNote = useSelector((state: RootState) => {
+    const selectedId = state.modal.id;
+    if (!selectedId) {
+      return null;
+    }
+    return getNotes(state).find(({ id }) => selectedId === id);
+  });
+
+  const [noteFormState, setNoteFormState] = useState<NoteFormState>(
+    initialNote ? initialNote : initialNoteFormState
+  );
+
   const { name, category, content } = noteFormState;
   const dispatch = useDispatch();
+  const closeModalForm = () => {
+    dispatch(closeModal());
+  };
+  useEffect(() => {
+    if (initialNote) {
+      setNoteFormState(initialNote);
+    }
+  }, [initialNote]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setNoteFormState((prevNoteFormState) => ({
       ...prevNoteFormState,
@@ -45,39 +69,52 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
     }));
   };
 
-  const handleAddNote = (e: ChangeEvent<HTMLFormElement>
-  ) => {
+  const handleFormSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     let noteDates = noteFormState.content.match(dateRegex) || "";
-    let dateObj = new Date();
-    let month = months[dateObj.getMonth()];
-    let day = dateObj.getDate();
-    let  year = dateObj.getFullYear();
-    
-    const newNote: Note = {
-      id: String(Date.now()),
-      name: noteFormState.name,
-      category: noteFormState.category,
-      content: noteFormState.content,
-      created_at: `${month} ${day},${year}`,
-      status: true,
-      dates: noteDates,
-    };
-    dispatch(addNote(newNote));
+
+    if (initialNote) {
+      const updatedNote: Note = {
+        ...initialNote,
+        name: noteFormState.name,
+        category: noteFormState.category,
+        content: noteFormState.content,
+        dates: noteDates,
+      };
+      dispatch(editNote(updatedNote));
+    } else {
+      let dateObj = new Date();
+      let month = months[dateObj.getMonth()];
+      let day = dateObj.getDate();
+      let year = dateObj.getFullYear();
+
+      const newNote: Note = {
+        id: String(Date.now()),
+        name: noteFormState.name,
+        category: noteFormState.category,
+        content: noteFormState.content,
+        created_at: `${month} ${day},${year}`,
+        status: true,
+        dates: noteDates,
+      };
+      dispatch(addNote(newNote));
+    }
     setNoteFormState(initialNoteFormState);
-    onClose()
+    closeModalForm();
   };
+  const isOpen = useSelector(toggleModal);
 
   return (
-    <div className="popup-wrapper" id="modal">
+    <div className={`popup-wrapper ${isOpen && "show"}`}>
       <div className="popup">
         <div className="content">
-          <p className="popup-title">Create new note!</p>
-          <button className="btn cross" onClick={onClose}>
+          <p className="popup-title">
+            {initialNote ? "Edit Note" : "Create New Note"}
+          </p>
+          <button className="btn cross" onClick={closeModalForm}>
             <Close />
           </button>
-          <form className="form" id="modal-form" onSubmit={handleAddNote}>
+          <form className="form" id="modal-form" onSubmit={handleFormSubmit}>
             <div className="row">
               <label>Name</label>
               <input
@@ -120,7 +157,7 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
             </div>
             <div className="wrapper-btn-create">
               <button type="submit" className="btn-create add">
-                Create note
+                {initialNote ? "Save Changes" : "Add Note"}
               </button>
             </div>
           </form>

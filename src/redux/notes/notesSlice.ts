@@ -103,9 +103,20 @@ const noteSlice = createSlice({
       if (noteToUpdateStatus) {
         noteToUpdateStatus.status = !noteToUpdateStatus.status;
       }
-    },
+      },
+      editNote(state, action: PayloadAction<Note>) {
+        const {id, name, category, content, dates } = action.payload;
+      const noteToUpdate = state.notes.find((note) => note.id === id);
+
+      if (noteToUpdate) {
+        noteToUpdate.name = name;
+        noteToUpdate.category = category;
+        noteToUpdate.content = content;
+        noteToUpdate.dates = dates;
+      }
+    }
   },
 });
 
-export const { deleteNote, addNote, toggleStatusNote } = noteSlice.actions;
+export const { deleteNote, addNote, toggleStatusNote, editNote} = noteSlice.actions;
 export const notesReducer = noteSlice.reducer;

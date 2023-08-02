@@ -1,9 +1,10 @@
 import React from "react";
+import{ useSelector } from 'react-redux'
+import TableArchiveRow from "./TableArchiveRow";
+import { getNotes } from "../../redux/notes/notesSelector";
+
 import { ReactComponent as Archive } from "../../images/archive.svg";
 import "../../styles/Tables.css";
-import TableArchiveRow from "./TableArchiveRow";
-import{ useSelector } from 'react-redux'
-import { getNotes } from "../../redux/notes/notesSelector";
 
 const TableArchive: React.FC = () => {
     const notes = useSelector(getNotes);

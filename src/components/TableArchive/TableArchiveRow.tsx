@@ -1,8 +1,9 @@
 import React from "react";
-import { NoteProps } from "../../typescript/typescriptTypes";
-import { ReactComponent as Archive } from "../../images/archive.svg";
 import { useDispatch } from "react-redux";
 import { toggleStatusNote } from "../../redux/notes/notesSlice";
+import { NoteProps } from "../../typescript/typescriptTypes";
+
+import { ReactComponent as Archive } from "../../images/archive.svg";
 
 const TableArchiveRow: React.FC<NoteProps> = ({ note }) => {
   const dispatch = useDispatch();

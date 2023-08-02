@@ -1,11 +1,12 @@
 import React from "react";
-import { ReactComponent as Archive } from "../../images/archive.svg";
-import { ReactComponent as Delete } from "../../images/delete.svg";
-import "../../styles/Tables.css";
-import TableActiveRow from "./TableActiveRow";
 import { useDispatch, useSelector } from "react-redux";
 import { getNotes } from "../../redux/notes/notesSelector";
 import { openModal } from "../../redux/modal/modalSlice";
+import TableActiveRow from "./TableActiveRow";
+
+import { ReactComponent as Archive } from "../../images/archive.svg";
+import { ReactComponent as Delete } from "../../images/delete.svg";
+import "../../styles/Tables.css";
 
 const TableActive: React.FC = () => {
   // const { isModalOpen, setIsModalOpen } = useModal({ styles: "show" });

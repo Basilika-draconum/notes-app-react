@@ -1,11 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { NoteProps } from "../../typescript/typescriptTypes";
+import { deleteNote, toggleStatusNote } from "../../redux/notes/notesSlice";
+import { openModal } from "../../redux/modal/modalSlice";
+
 import { ReactComponent as Archive } from "../../images/archive.svg";
 import { ReactComponent as Delete } from "../../images/delete.svg";
 import { ReactComponent as Edit } from "../../images/edit.svg";
-import { useDispatch } from "react-redux";
-import { deleteNote, toggleStatusNote } from "../../redux/notes/notesSlice";
-import { openModal } from "../../redux/modal/modalSlice";
 
 const TableActiveRow: React.FC<NoteProps> = ({ note }) => {
   const dispatch = useDispatch();

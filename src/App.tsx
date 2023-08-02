@@ -1,10 +1,10 @@
 import React from 'react';
-import './styles/App.css';
 import TableActive from './components/TableActive/TableActive';
 import TableCount from './components/TableCount/TableCount';
 import TableArchive from './components/TableArchive/TableArchive';
 import Modal from './components/Modal/Modal';
 
+import './styles/App.css';
 
 const App: React.FC = () => {
 
@@ -17,7 +17,6 @@ const App: React.FC = () => {
         <TableArchive />
         <Modal />
       </div>
-      
     </main>
   );
 }

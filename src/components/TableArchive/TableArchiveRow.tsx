@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { toggleStatusNote } from "../../redux/notes/notesSlice";
-import { NoteProps } from "../../typescript/typescriptTypes";
+import { NoteProps } from "../../types/typescriptTypes";
 
 import { ReactComponent as Archive } from "../../images/archive.svg";
 

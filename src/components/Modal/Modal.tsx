@@ -5,7 +5,7 @@ import {
   ModalProps,
   Note,
   NoteFormState,
-} from "../../typescript/typescriptTypes";
+} from "../../types/typescriptTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { addNote, editNote } from "../../redux/notes/notesSlice";
 import { toggleModal } from "../../redux/modal/modalSelector";
@@ -97,6 +97,11 @@ const Modal: React.FC<ModalProps> = () => {
         status: true,
         dates: noteDates,
       };
+    
+      if (!newNote.name || !newNote.category || !newNote.content) {
+        alert("Please fill in all required fields.");
+        return;
+      }
       dispatch(addNote(newNote));
     }
     setNoteFormState(initialNoteFormState);

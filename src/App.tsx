@@ -11,7 +11,7 @@ const App: React.FC = () => {
   return (
     <main className="App">
       <div className="container">
-        <h1>Hello, it's my notes</h1>
+        <h1>My notes</h1>
         <TableActive/>
         <TableCount />
         <TableArchive />

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { NoteProps } from "../../typescript/typescriptTypes";
+import { NoteProps } from "../../types/typescriptTypes";
 import { deleteNote, toggleStatusNote } from "../../redux/notes/notesSlice";
 import { openModal } from "../../redux/modal/modalSlice";
 

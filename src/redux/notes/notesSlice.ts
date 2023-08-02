@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, Draft } from "@reduxjs/toolkit";
-import { NotesList, Note } from "../../typescript/typescriptTypes";
+import { NotesList, Note } from "../../types/typescriptTypes";
 import { produce } from "immer";
 const initialState: NotesList = {
   notes: [

@@ -1,5 +1,5 @@
 import React from "react";
-import { Note } from "../../typescript/typescriptTypes";
+import { Note } from "../../types/typescriptTypes";
 import { getNotes } from "../../redux/notes/notesSelector";
 import { useSelector } from "react-redux";
 import "../../styles/Tables.css";

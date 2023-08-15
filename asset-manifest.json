@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/notes-app-react/static/css/main.af669388.css",
+    "main.js": "/notes-app-react/static/js/main.9dc30358.js",
+    "index.html": "/notes-app-react/index.html",
+    "static/media/cross.svg": "/notes-app-react/static/media/cross.dcc90cb9b4c15ee5a161025509096b84.svg",
+    "static/media/delete.svg": "/notes-app-react/static/media/delete.3fc4d03547717485f8133e28d9e469bf.svg",
+    "static/media/archive.svg": "/notes-app-react/static/media/archive.75e4beb8cbbfe48ad95507a108e15323.svg",
+    "static/media/edit.svg": "/notes-app-react/static/media/edit.61df43015baa74af51b7849746968156.svg",
+    "main.af669388.css.map": "/notes-app-react/static/css/main.af669388.css.map",
+    "main.9dc30358.js.map": "/notes-app-react/static/js/main.9dc30358.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.af669388.css",
+    "static/js/main.9dc30358.js"
+  ]
+}
